@@ -1,8 +1,7 @@
 from django.contrib import admin
-from django.urls import path
-from my_first_app.views import my_view
+from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('carlist/', my_view, name='carlist'),
+    path('carros', include('my_first_app.urls')),
 ]

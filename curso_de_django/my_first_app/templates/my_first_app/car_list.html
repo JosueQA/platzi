@@ -7,5 +7,10 @@
 </head>
 <body>
     Hello, this is the car list page.
+    <ul>
+        {% for car in car_list_key %}
+            <li>{{ car.title }} - {{ car.year }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
