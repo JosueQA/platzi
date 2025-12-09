@@ -1,6 +1,6 @@
-from django.http import HttpResponse
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    path(' ', HttpResponse("Hello, this is the car list page.")),
+    path('ejemplo', views.example_view),
 ]
