@@ -1,0 +1,1319 @@
+diff --git a/CursoDeReactConViteYTailwindCSS b/CursoDeReactConViteYTailwindCSS
+new file mode 160000
+index 0000000..6a78293
+--- /dev/null
++++ b/CursoDeReactConViteYTailwindCSS
+@@ -0,0 +1 @@
++Subproject commit 6a7829318b59efc569f2c769dafa2b3a38b00339
+diff --git a/cursoBasicoDePOOConJS/Herencia/index.html b/cursoBasicoDePOOConJS/Herencia/index.html
+new file mode 100644
+index 0000000..7c87995
+--- /dev/null
++++ b/cursoBasicoDePOOConJS/Herencia/index.html
+@@ -0,0 +1,13 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>Document</title>
++</head>
++<body>
++    
++    <script src="main.js"></script>
++</body>
++</html>
+\ No newline at end of file
+diff --git a/cursoBasicoDePOOConJS/Herencia/main.js b/cursoBasicoDePOOConJS/Herencia/main.js
+new file mode 100644
+index 0000000..1e45333
+--- /dev/null
++++ b/cursoBasicoDePOOConJS/Herencia/main.js
+@@ -0,0 +1,195 @@
++// Codigo complementario
++
++function videoPlay(id) {
++  const urlSecreta = "https://platziultrasecretomasquelanasa.com/" + id;
++  console.log("Se está reproduciendo desde la url " + urlSecreta);
++}
++function videoStop(id) {
++  const urlSecreta = "https://platziultrasecretomasquelanasa.com/" + id;
++  console.log("Pausamos la url " + urlSecreta);
++}
++
++class PlatziClass {
++  constructor({
++    name,
++    videoID,
++  }) {
++    this.name = name;
++    this.videoID = videoID;
++  }
++
++  reproducir() {
++    videoPlay(this.videoID);
++  }
++  pausar() {
++    videoStop(this.videoID);
++  }
++}
++
++class Course {
++  constructor({
++    name,
++    classes = [],
++    isFree = false,
++    lang = "spanish",
++  }) {
++    this._name = name;
++    this.classes = classes;
++    this.isFree = isFree;
++    this.lang = lang;
++  }
++
++  get name() {
++    return this._name;
++  }
++
++  set name(nuevoNombrecito) {
++    if (nuevoNombrecito === "Curso Malito de Programación Básica") {
++      console.error("Web... no");
++    } else {
++      this._name = nuevoNombrecito;
++    }
++  }
++}
++
++const cursoProgBasica = new Course({
++  name: "Curso Gratis de Programación Básica",
++  isFree: true,
++});
++const cursoDefinitivoHTML = new Course({
++  name: "Curso Definitivo de HTML y CSS",
++});
++const cursoPracticoHTML = new Course({
++  name: "Curso Practico de HTML y CSS",
++  lang: "english",
++});
++
++
++class LearningPath {
++  constructor({
++    name,
++    courses = [],
++  }) {
++    this.name = name;
++    this.courses = courses;
++  }
++}
++
++const escuelaWeb = new LearningPath({
++  name: "Escuela de Desarrollo Web",
++  courses: [
++    cursoProgBasica,
++    cursoDefinitivoHTML,
++    cursoPracticoHTML,
++  ],
++});
++
++const escuelaData = new LearningPath({
++  name: "Escuela de Data Science",
++  courses: [
++    cursoProgBasica,
++    "Curso DataBusiness",
++    "Curso Dataviz",
++  ],
++});
++
++const escuelaVgs = new LearningPath({
++  name: "Escuela de Vidweojuegos",
++  courses: [
++    cursoProgBasica,
++    "Curso de Unity",
++    "Curso de Unreal",
++  ],
++})
++
++
++// Clase madre
++class Student {
++  constructor({
++    name,
++    email,
++    username,
++    twitter = undefined,
++    instagram = undefined,
++    facebook = undefined,
++    approvedCourses = [],
++    learningPaths = [],
++  }) {
++    this.name = name;
++    this.email = email;
++    this.username = username;
++    this.socialMedia = {
++      twitter,
++      instagram,
++      facebook,
++    };
++    this.approvedCourses = approvedCourses;
++    this.learningPaths = learningPaths;
++  }
++}
++
++class FreeStudent extends Student {
++  constructor(props) {
++    super(props)
++  }
++
++  approvedCourse(newCourse) {
++    if (newCourse.isFree) {
++      this.approvedCourses.push(newCourse);
++    } else {
++      console.warn("Lo sentimos, " + this.name + ", solo puedes tomar cursos abiertos.")
++    }
++  }
++}
++
++class BasicStudent extends Student {
++  constructor(props) {
++    super(props);
++  }
++
++  approveCourse(newCourse) {
++    if (newCourse.lang !== "english") {
++      this.approvedCourses.push(newCourse);
++    } else {
++      console.warn("Lo sentimos, " + this.name + ", no puedes tomar cursos en inglés");
++    }
++  }
++}
++
++class ExpertStudent extends Student {
++  constructor(props) {
++    super(props);
++  }
++
++  approveCourse(newCourse) {
++    this.approvedCourses.push(newCourse);
++  }
++}
++
++
++const juan = new FreeStudent({
++  name: "JuanDC",
++  username: "juandc",
++  email: "juanito@juanito.com",
++  twitter: "fjuandc",
++  learningPaths: [
++    escuelaWeb,
++    escuelaVgs,
++  ],
++});
++
++const miguelito = new BasicStudent({
++  name: "Miguelito",
++  username: "migelitofeliz",
++  email: "miguelito@juanito.com",
++  instagram: "migelito_feliz",
++  learningPaths: [
++    escuelaWeb,
++    escuelaData,
++  ],
++});
++
++
++
++
++
+diff --git "a/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/index.html" "b/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/index.html"
+new file mode 100644
+index 0000000..b372efa
+--- /dev/null
++++ "b/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/index.html"	
+@@ -0,0 +1,16 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>Document</title>
++</head>
++<body>
++    
++    <!-- <script src="mainModulos.mjs" type="module"></script> -->
++    <script type="module"> 
++        import { Platziclass } from "./mainModulos.mjs" 
++    </script>
++</body>
++</html>
+\ No newline at end of file
+diff --git "a/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/mainModulos.mjs" "b/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/mainModulos.mjs"
+new file mode 100644
+index 0000000..ff4448d
+--- /dev/null
++++ "b/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/mainModulos.mjs"	
+@@ -0,0 +1,24 @@
++function videoPlay(id) {
++    const urlSecreta = "https://platziultrasecretomasquelanasa.com/" + id;
++    console.log("Se está reproduciendo desde la url " + urlSecreta);
++}
++function videoStop(id) {
++    const urlSecreta = "https://platziultrasecretomasquelanasa.com/" + id;
++    console.log("Pausamos la url " + urlSecreta);
++}
++
++export class PlatziClass {
++    constructor({
++        name, 
++        videoID,
++    }) {
++        this.name = name;
++        this.videoID = videoID;
++    }
++    reproducir() {
++        videoPlay(this.videoID);
++    }
++    pausar() {
++        videoStop(this.videoID);
++    }
++}
+\ No newline at end of file
+diff --git "a/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/module.mjs" "b/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/module.mjs"
+new file mode 100644
+index 0000000..13706a4
+--- /dev/null
++++ "b/cursoBasicoDePOOConJS/M\303\263dulos de ECMAScript 6/module.mjs"	
+@@ -0,0 +1,9 @@
++import { PlatziClass } from "./mainModulos.mjs" ;
++
++const clase67 = new PlatziClass({
++    name: "Javascript: orientado a objetos, basado en prototipos",
++    videoID: "ga345c2rq23af"
++})
++
++clase67.reproducir();
++clase67.pausar();
+\ No newline at end of file
+diff --git a/cursoBasicoDePOOConJS/Polimorfismo/index.html b/cursoBasicoDePOOConJS/Polimorfismo/index.html
+new file mode 100644
+index 0000000..7c87995
+--- /dev/null
++++ b/cursoBasicoDePOOConJS/Polimorfismo/index.html
+@@ -0,0 +1,13 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>Document</title>
++</head>
++<body>
++    
++    <script src="main.js"></script>
++</body>
++</html>
+\ No newline at end of file
+diff --git a/cursoBasicoDePOOConJS/Polimorfismo/main.js b/cursoBasicoDePOOConJS/Polimorfismo/main.js
+new file mode 100644
+index 0000000..8cab9c1
+--- /dev/null
++++ b/cursoBasicoDePOOConJS/Polimorfismo/main.js
+@@ -0,0 +1,244 @@
++class Comment {
++    constructor ({
++        content,
++        studentName,
++        studentRole = "estudiante"
++    }) {
++        this.content = content;
++        this.studentName = studentName;
++        this.studentRole = studentRole;
++        this.likes = 0;
++    }
++
++    publicar() {
++        console.log(this.studentName + " (" + this.studentRole + ")");
++        console.log(this.likes + " likes");
++        console.log(this.content)
++    }
++}
++
++
++function videoPlay(id) {
++    const urlSecreta = "https://platziultrasecretomasquelanasa.com/" + id;
++    console.log("Se está reproduciendo desde la url " + urlSecreta);
++  }
++  function videoStop(id) {
++    const urlSecreta = "https://platziultrasecretomasquelanasa.com/" + id;
++    console.log("Pausamos la url " + urlSecreta);
++  }
++  
++  class PlatziClass {
++    constructor({
++      name,
++      videoID,
++    }) {
++      this.name = name;
++      this.videoID = videoID;
++    }
++  
++    reproducir() {
++      videoPlay(this.videoID);
++    }
++    pausar() {
++      videoStop(this.videoID);
++    }
++  }
++  
++  class Course {
++    constructor({
++      name,
++      classes = [],
++      isFree = false,
++      lang = "spanish",
++    }) {
++      this._name = name;
++      this.classes = classes;
++      this.isFree = isFree;
++      this.lang = lang;
++    }
++  
++    get name() {
++      return this._name;
++    }
++  
++    set name(nuevoNombrecito) {
++      if (nuevoNombrecito === "Curso Malito de Programación Básica") {
++        console.error("Web... no");
++      } else {
++        this._name = nuevoNombrecito;
++      }
++    }
++  }
++  
++  const cursoProgBasica = new Course({
++    name: "Curso Gratis de Programación Básica",
++    isFree: true,
++  });
++  const cursoDefinitivoHTML = new Course({
++    name: "Curso Definitivo de HTML y CSS",
++  });
++  const cursoPracticoHTML = new Course({
++    name: "Curso Practico de HTML y CSS",
++    lang: "english",
++  });
++  
++  
++  class LearningPath {
++    constructor({
++      name,
++      courses = [],
++    }) {
++      this.name = name;
++      this.courses = courses;
++    }
++  }
++  
++  const escuelaWeb = new LearningPath({
++    name: "Escuela de Desarrollo Web",
++    courses: [
++      cursoProgBasica,
++      cursoDefinitivoHTML,
++      cursoPracticoHTML,
++    ],
++  });
++  
++  const escuelaData = new LearningPath({
++    name: "Escuela de Data Science",
++    courses: [
++      cursoProgBasica,
++      "Curso DataBusiness",
++      "Curso Dataviz",
++    ],
++  });
++  
++  const escuelaVgs = new LearningPath({
++    name: "Escuela de Vidweojuegos",
++    courses: [
++      cursoProgBasica,
++      "Curso de Unity",
++      "Curso de Unreal",
++    ],
++  })
++  
++  
++  // Clase madre
++  class Student {
++    constructor({
++      name,
++      email,
++      username,
++      twitter = undefined,
++      instagram = undefined,
++      facebook = undefined,
++      approvedCourses = [],
++      learningPaths = [],
++    }) {
++      this.name = name;
++      this.email = email;
++      this.username = username;
++      this.socialMedia = {
++        twitter,
++        instagram,
++        facebook,
++      };
++      this.approvedCourses = approvedCourses;
++      this.learningPaths = learningPaths;
++    }
++
++    publicarComentario(commentContent){
++        const comment = new  Comment({
++            content: commentContent,
++            studentName: this.name,
++        });
++        comment.publicar()
++    }
++  }
++  
++  class FreeStudent extends Student {
++    constructor(props) {
++      super(props)
++    }
++  
++    approvedCourse(newCourse) {
++      if (newCourse.isFree) {
++        this.approvedCourses.push(newCourse);
++      } else {
++        console.warn("Lo sentimos, " + this.name + ", solo puedes tomar cursos abiertos.")
++      }
++    }
++  }
++  
++  class BasicStudent extends Student {
++    constructor(props) {
++      super(props);
++    }
++  
++    approveCourse(newCourse) {
++      if (newCourse.lang !== "english") {
++        this.approvedCourses.push(newCourse);
++      } else {
++        console.warn("Lo sentimos, " + this.name + ", no puedes tomar cursos en inglés");
++      }
++    }
++  }
++  
++  class ExpertStudent extends Student {
++    constructor(props) {
++      super(props);
++    }
++  
++    approveCourse(newCourse) {
++      this.approvedCourses.push(newCourse);
++    }
++  }
++  
++  class TeacherStudent extends Student {
++    constructor(props) {
++      super(props);
++    }
++  
++    approveCourse(newCourse) {
++      this.approvedCourses.push(newCourse);
++    }
++
++    publicarComentario(commentContent){
++        const comment = new  Comment({
++            content: commentContent,
++            studentName: this.name,
++            studentRole: "profesor",
++        });
++        comment.publicar()
++    }
++  }
++
++  
++  const juan = new FreeStudent({
++    name: "JuanDC",
++    username: "juandc",
++    email: "juanito@juanito.com",
++    twitter: "fjuandc",
++    learningPaths: [
++      escuelaWeb,
++      escuelaVgs,
++    ],
++  });
++  
++  const miguelito = new BasicStudent({
++    name: "Miguelito",
++    username: "migelitofeliz",
++    email: "miguelito@juanito.com",
++    instagram: "migelito_feliz",
++    learningPaths: [
++      escuelaWeb,
++      escuelaData,
++    ],
++  });
++
++  const freddy = new TeacherStudent({
++    name: "Freddy Vega",
++    username: "freddier",
++    email: "f@gep.com",
++    instagram: "freddiervega",
++  });
++
++  
+\ No newline at end of file
+diff --git a/cursoBasicoDePOOConJS/abstraccion.js b/cursoBasicoDePOOConJS/abstraccion.js
+new file mode 100644
+index 0000000..d17f238
+--- /dev/null
++++ b/cursoBasicoDePOOConJS/abstraccion.js
+@@ -0,0 +1,117 @@
++class Course {
++    constructor({
++      name,
++      classes = [],
++    }) {
++      this._name = name;
++      this.classes = classes;
++    }
++  
++    get name (){
++        return this._name;
++      };
++
++    set name (nuevoNombrecito){
++        if (nuevoNombrecito === 'Curso Malito'){
++            console.error('web...no');
++        } else {
++            this._name = nuevoNombrecito;
++        }
++    }
++}
++
++cursoPracticoHTML.name = "Curso para practicar de HTML"
++  
++  const cursoProgBasica = new Course({
++    name: "Curso Gratis de Programación Básica",
++  });
++  const cursoDefinitivoHTML = new Course({
++    name: "Curso Definitivo de HTML y CSS",
++  });
++  const cursoPracticoHTML = new Course({
++    name: "Curso Practico de HTML y CSS",
++  });
++  
++  
++  class LearningPath {
++    constructor({
++      name,
++      courses = [],
++    }) {
++      this.name = name;
++      this.courses = courses;
++    }
++  }
++  
++  const escuelaWeb = new LearningPath({
++    name: "Escuela de Desarrollo Web",
++    courses: [
++      cursoProgBasica,
++      cursoDefinitivoHTML,
++      cursoPracticoHTML,
++    ],
++  });
++  
++  const escuelaData = new LearningPath({
++    name: "Escuela de Data Science",
++    courses: [
++      cursoProgBasica,
++      "Curso DataBusiness",
++      "Curso Dataviz",
++    ],
++  });
++  
++  const escuelaVgs = new LearningPath({
++    name: "Escuela de Vidweojuegos",
++    courses: [
++      cursoProgBasica,
++      "Curso de Unity",
++      "Curso de Unreal",
++    ],
++  })
++  
++  class Student {
++    constructor({
++      name,
++      email,
++      username,
++      twitter = undefined,
++      instagram = undefined,
++      facebook = undefined,
++      approvedCourses = [],
++      learningPaths = [],
++    }) {
++      this.name = name;
++      this.email = email;
++      this.username = username;
++      this.socialMedia = {
++        twitter,
++        instagram,
++        facebook,
++      };
++      this.approvedCourses = approvedCourses;
++      this.learningPaths = learningPaths;
++    }
++  }
++  
++  const juan2 = new Student({
++    name: "JuanDC",
++    username: "juandc",
++    email: "juanito@juanito.com",
++    twitter: "fjuandc",
++    learningPaths: [
++      escuelaWeb,
++      escuelaVgs,
++    ],
++  });
++  
++  const miguelito2 = new Student({
++    name: "Miguelito",
++    username: "migelitofeliz",
++    email: "miguelito@juanito.com",
++    instagram: "migelito_feliz",
++    learningPaths: [
++      escuelaWeb,
++      escuelaData,
++    ],
++  });
+\ No newline at end of file
+diff --git a/cursoBasicoDePOOConJS/main.js b/cursoBasicoDePOOConJS/main.js
+new file mode 100644
+index 0000000..242d3c2
+--- /dev/null
++++ b/cursoBasicoDePOOConJS/main.js
+@@ -0,0 +1,190 @@
++const natalia = {
++  name: "Natalia",
++  age: 20,
++  cursosAprobados: [
++    "Curso Definitivo de HTML y CSS",
++    "Curso Práctico de HTML y CSS",
++  ],
++  aprobarCurso(nuevoCursito) {
++    this.cursosAprobados.push(nuevoCursito);
++  },
++};
++
++
++function Student(name, age, cursosAprobados) {
++  this.name = name;
++  this.age = age;
++  this.cursosAprobados = cursosAprobados;
++  // this.aprobarCurso = function (nuevoCursito) {
++  //   this.cursosAprobados.push(nuevoCursito);
++  // }
++}
++
++Student.prototype.aprobarCurso = function (nuevoCursito) {
++  this.cursosAprobados.push(nuevoCursito);
++}
++
++const juanita = new Student(
++  "Juanita Alejandra",
++  15,
++  [
++    "Curso de Introducción a la Producción de Videojuegos",
++    "Curso de Creación de Personajes",
++  ],
++);
++
++// Prototipos con la sintaxis de clases
++class Student2 {
++  constructor({ 
++    name, 
++    cursosAprobados = [], 
++    age, 
++    email,
++    facebook,
++    twitter,
++    spotify
++  }) { 
++    this.name = name;
++    this.email = email; 
++    this.age = age; 
++    this.cursosAprobados = cursosAprobados;
++    this.facebook = facebook;
++    this.twitter = twitter;
++    this.spotify =  spotify
++  }
++  aprobarCurso(nuevoCursito) { 
++    this.cursosAprobados.push(nuevoCursito)}
++}
++
++const miguelito = new Student2({
++  name: "Miguel",
++  age: 28,
++  cursosAprobados: [
++    "Curso de Analisis",
++    "Curso de principios"
++  ],
++  email: "miguelito@platzi.com",
++});
++
++
++
++// Ventajas de la programación orientada a objetos
++
++class Course {
++  constructor({
++    id,
++    name,
++    teacher,
++    lessons = [],
++  }) {
++    this.id = id;
++    this.name = name;
++    this.teacher = teacher;
++    this.lessons = lessons;
++  }
++}
++
++class LearningPath {
++  constructor({
++    id,
++    name,
++    courses = [],
++  }) {
++    this.id = id;
++    this.name = name;
++    this.courses = courses;
++  }
++
++  addCourse(course) {
++    this.courses.push(course);
++  }
++
++  replaceCourse(oldCourse, newCourse) {
++    const oldCourseIndex = this.courses.findIndex(course => course.id === oldCourse.id);
++
++    if (oldCourseIndex !== -1) {
++      this.courses[oldCourseIndex] = newCourse;
++    }
++
++    return this.courses;
++  }
++
++  deleteCourse(oldCourse) {
++    const courseIndex = this.courses.findIndex(course => course.id === oldCourse.id);
++    this.courses.splice(courseIndex, 1);
++
++    return this.courses;
++  }
++}
++
++/* 
++const reactNativeLearningPath = new LearningPath({
++  id: 'react-native',
++  name: 'Desarrollo de Apps con React Native',
++  courses: [
++    new Course({ 
++      id: 'basico-javascript', 
++      name: 'Curso Básico de JavaScript', 
++      teacher: 'Diego De Granda',
++    }),
++    new Course({
++      id: 'ecmascript-6',
++      name: 'Curso de ECMAScript 6+',
++      teacher: 'Orlando Naipes',
++    }),
++    // etc...
++  ]
++})
++*/
++
++
++const escuelaWeb = new LearningPath();
++const escuelaData = new LearningPath();
++const escuelaVgs = new LearningPath();
++
++class Student {
++  constructor({
++    name,
++    email,
++    username,
++    twitter = undefined,
++    instagram = undefined,
++    facebook = undefined,
++    approvedCourses = [],
++    learningPaths = [],
++  }) {
++    this.name = name;
++    this.email = email;
++    this.username = username;
++    this.socialMedia = {
++      twitter,
++      instagram,
++      facebook,
++    };
++    this.approvedCourses = approvedCourses;
++    this.learningPaths = learningPaths;
++  }
++}
++
++const juan2 = new Student({
++  name: "JuanDC",
++  username: "juandc",
++  email: "juanito@juanito.com",
++  twitter: "fjuandc",
++  learningPaths: [
++    escuelaWeb,
++    escuelaVgs,
++  ],
++});
++
++const miguelito2 = new Student({
++  name: "Miguelito",
++  username: "migelitofeliz",
++  email: "miguelito@juanito.com",
++  instagram: "migelito_feliz",
++  learningPaths: [
++    escuelaWeb,
++    escuelaData,
++  ],
++});
++
+diff --git a/cursoBasicoDePOOConJS/testing.js b/cursoBasicoDePOOConJS/testing.js
+new file mode 100644
+index 0000000..e5dc873
+--- /dev/null
++++ b/cursoBasicoDePOOConJS/testing.js
+@@ -0,0 +1,44 @@
++class Banda {
++    constructor({
++        nombre,
++        generos = [],
++    }) {
++        this.nombre = nombre;
++        this.generos = generos;
++        this.integrantes = [];
++    }
++    agregarIntegrante(integranteNuevo) {
++        // Tu código aquí 👈
++        let x = this.integrantes.map(y => {
++            if (y.instrumento == (integranteNuevo.instrumento)){
++                return true
++            };
++            
++        });
++
++        if (x == false) {
++            this.integrantes.push(integranteNuevo)
++        }
++    }
++}
++
++//Crear clase Integrante
++class Integrante {
++    // Tu código aquí 👈
++    constructor({ nombre, instrumento }) {
++        this.nombre = nombre,
++            this.instrumento = instrumento
++    }
++}
++
++const data = {
++    nombre: "Los Jacks",
++    generos: ["rock", "pop", "post-punk"],
++    integrantes: [],
++}
++const banda = new Banda(data)
++banda.agregarIntegrante(new Integrante({ nombre: "Erik", instrumento: "Guitarra" }))
++banda.agregarIntegrante(new Integrante({ nombre: "Paul", instrumento: "Bateria" }))
++banda.agregarIntegrante(new Integrante({ nombre: "Logan", instrumento: "Bateria" }))
++
++console.log(banda)
+\ No newline at end of file
+diff --git a/cursoDeConsumoDeAPIRESTConJS/index.html b/cursoDeConsumoDeAPIRESTConJS/index.html
+new file mode 100644
+index 0000000..78e8f3c
+--- /dev/null
++++ b/cursoDeConsumoDeAPIRESTConJS/index.html
+@@ -0,0 +1,16 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>Gatitos aleatorios</title>
++</head>
++<body>
++    <h1>Gatitos aleatorios</h1>
++
++    <img alt="foto gatito aleatorio">
++
++    <script src="./main.js"></script>
++</body>
++</html>
+\ No newline at end of file
+diff --git a/cursoDeConsumoDeAPIRESTConJS/main.js b/cursoDeConsumoDeAPIRESTConJS/main.js
+new file mode 100644
+index 0000000..f5bda8d
+--- /dev/null
++++ b/cursoDeConsumoDeAPIRESTConJS/main.js
+@@ -0,0 +1 @@
++console.log('Hello world')
+\ No newline at end of file
+diff --git a/cursodeintroduccionareact/src/App.js b/cursodeintroduccionareact/src/App.js
+deleted file mode 100644
+index 74cfa9a..0000000
+--- a/cursodeintroduccionareact/src/App.js
++++ /dev/null
+@@ -1,34 +0,0 @@
+-import React from 'react';
+-import { TodoCounter } from './TodoCounter';
+-import { TodoItem } from './TodoItem';
+-import { TodoList } from './TodoList';
+-import { TodoSearch } from './TodoSearch'; 
+-import { CreateTodoButton } from './CreateTodoButton';
+-import './App.css';
+-
+-const todos = [
+-  { text: 'Cortar cebolla', completed: true },
+-  { text: 'Tomar el curso de intro a React', completed: false },
+-  { text: 'Llorar con la llorona', completed: false },
+-]
+-
+-function App() {
+-  return (
+-    <React.Fragment>
+-      <TodoCounter/>,
+-      <TodoSearch/>,
+-      <TodoList>
+-        {todos.map(todos => (
+-          <TodoItem 
+-          key={todos.text} 
+-          text={todos.text}
+-          completed={todos.completed}/>
+-        ))},
+-      </TodoList>,
+-      <CreateTodoButton/>
+-    </React.Fragment>
+-  );
+-}
+-
+-export default App;
+- 
+\ No newline at end of file
+diff --git a/cursodeintroduccionareact/src/App.css b/cursodeintroduccionareact/src/App/App.css
+similarity index 100%
+rename from cursodeintroduccionareact/src/App.css
+rename to cursodeintroduccionareact/src/App/App.css
+diff --git a/cursodeintroduccionareact/src/App/AppUI.js b/cursodeintroduccionareact/src/App/AppUI.js
+new file mode 100644
+index 0000000..042144f
+--- /dev/null
++++ b/cursodeintroduccionareact/src/App/AppUI.js
+@@ -0,0 +1,44 @@
++import React from 'react';
++import { TodoCounter } from '../TodoCounter/index.';
++import { TodoItem } from '../TodoItem/index.';
++import { TodoList } from '../TodoList';
++import { TodoSearch } from '../TodoSearch'; 
++import { CreateTodoButton } from '../CreateTodoButton';
++import './App.css';
++
++function AppUI({
++  totalTodos,
++  completedTodos,
++  searchValue,
++  setSearchValue,
++  searchedTodos,
++  completeTodo,
++  deleteTodo
++}) {
++return (
++    <React.Fragment>
++      <TodoCounter
++        total = {totalTodos}
++        completed = {completedTodos}
++      />,
++      <TodoSearch
++        searchvalue={searchValue}
++        setSearchValue={setSearchValue}
++      />,
++      <TodoList>
++        {searchedTodos.map(todos => (
++          <TodoItem 
++          key={todos.text} 
++          text={todos.text}
++          completed={todos.completed}
++          onComplete= {() => completeTodo(todos.text)}
++          onDelete= {() => deleteTodo(todos.text)}
++          />
++        ))},
++      </TodoList>,
++      <CreateTodoButton/>
++    </React.Fragment>
++  )
++}
++
++export {AppUI}
+\ No newline at end of file
+diff --git a/cursodeintroduccionareact/src/App/index.js b/cursodeintroduccionareact/src/App/index.js
+new file mode 100644
+index 0000000..3bc1623
+--- /dev/null
++++ b/cursodeintroduccionareact/src/App/index.js
+@@ -0,0 +1,75 @@
++import React from 'react';
++import { AppUI } from './AppUI';
++
++// const defaultTodos = [
++//   { text: 'Cortar cebolla', completed: true },
++//   { text: 'Tomar el curso de intro a React', completed: false },
++//   { text: 'Llorar con la llorona', completed: false },
++// ]
++
++
++function App() {
++  const localStorageTodos = localStorage.getItem('TODOS_V1');
++  let todosProjection;
++
++  if(!localStorageTodos){
++    localStorage.setItem('TODOS_V1', JSON.stringify([]));
++    todosProjection = []
++  } else {
++    todosProjection = JSON.parse(localStorageTodos)
++  }
++  
++
++  const [todos, setTodos] = React.useState(todosProjection);
++  const [searchValue, setSearchValue] = React.useState('');
++
++  let searchedTodos = [];
++
++  if (!searchValue.length >= 1){
++    searchedTodos = todos;
++  } else {
++    searchedTodos = todos.filter(todo => {
++        const todoText = todo.text.toLowerCase();
++        const searchText = searchValue.toLowerCase(); 
++
++        return todoText.includes(searchText);
++        })
++  }
++
++  const savedTodos = (newTodos) => {
++    let stringyfiedTodos = localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
++    setTodos(JSON.parse(stringyfiedTodos))
++  }
++
++  const completeTodo = (text) => {
++    const todoIndex = todos.findIndex(todo => todo.text === text);
++    const newTodos = [...todos];
++    newTodos[todoIndex].completed = true;
++    savedTodos(newTodos)
++  }
++
++  const deleteTodo = (text) => {
++    const todoIndex = todos.findIndex(todo => todo.text === text);
++    const newTodos = [...todos];
++    newTodos.splice(todoIndex, 1);
++    savedTodos(newTodos)
++  }
++
++  const completedTodos = todos.filter( todos => !!todos.completed).length;
++  const totalTodos = todos.length;
++
++  return (
++    <AppUI 
++    totalTodos = {totalTodos}
++    completedTodos = {completedTodos}
++    searchValue={searchValue}
++    setSearchValue={setSearchValue}
++    searchedTodos = {searchedTodos}
++    completeTodo = {completeTodo}
++    deleteTodo = {deleteTodo}
++    />
++  );
++}
++
++export default App;
++ 
+\ No newline at end of file
+diff --git a/cursodeintroduccionareact/src/CreateTodoButton.css b/cursodeintroduccionareact/src/CreateTodoButton/CreateTodoButton.css
+similarity index 100%
+rename from cursodeintroduccionareact/src/CreateTodoButton.css
+rename to cursodeintroduccionareact/src/CreateTodoButton/CreateTodoButton.css
+diff --git a/cursodeintroduccionareact/src/CreateTodoButton.js b/cursodeintroduccionareact/src/CreateTodoButton/index.js
+similarity index 100%
+rename from cursodeintroduccionareact/src/CreateTodoButton.js
+rename to cursodeintroduccionareact/src/CreateTodoButton/index.js
+diff --git a/cursodeintroduccionareact/src/TodoCounter.js b/cursodeintroduccionareact/src/TodoCounter.js
+deleted file mode 100644
+index 48fccba..0000000
+--- a/cursodeintroduccionareact/src/TodoCounter.js
++++ /dev/null
+@@ -1,10 +0,0 @@
+-import React from "react";
+-import './TodoCounter.css'
+-
+-function TodoCounter() {
+-    return(
+-        <h2 className="TodoCounter">Has completado 2 de 3 TODOs</h2>
+-    );
+-}
+-
+-export { TodoCounter };
+\ No newline at end of file
+diff --git a/cursodeintroduccionareact/src/TodoCounter.css b/cursodeintroduccionareact/src/TodoCounter/TodoCounter.css
+similarity index 100%
+rename from cursodeintroduccionareact/src/TodoCounter.css
+rename to cursodeintroduccionareact/src/TodoCounter/TodoCounter.css
+diff --git a/cursodeintroduccionareact/src/TodoCounter/index..js b/cursodeintroduccionareact/src/TodoCounter/index..js
+new file mode 100644
+index 0000000..c10e843
+--- /dev/null
++++ b/cursodeintroduccionareact/src/TodoCounter/index..js
+@@ -0,0 +1,10 @@
++import React from "react";
++import './TodoCounter.css'
++
++function TodoCounter({total, completed}) {
++    return(
++        <h2 className="TodoCounter">Has completado {completed} de {total} TODOs</h2>
++    );
++}
++
++export { TodoCounter };
+\ No newline at end of file
+diff --git a/cursodeintroduccionareact/src/TodoItem.css b/cursodeintroduccionareact/src/TodoItem/TodoItem.css
+similarity index 100%
+rename from cursodeintroduccionareact/src/TodoItem.css
+rename to cursodeintroduccionareact/src/TodoItem/TodoItem.css
+diff --git a/cursodeintroduccionareact/src/TodoItem.js b/cursodeintroduccionareact/src/TodoItem/index..js
+similarity index 65%
+rename from cursodeintroduccionareact/src/TodoItem.js
+rename to cursodeintroduccionareact/src/TodoItem/index..js
+index 88c7ac9..4dbefa7 100644
+--- a/cursodeintroduccionareact/src/TodoItem.js
++++ b/cursodeintroduccionareact/src/TodoItem/index..js
+@@ -2,19 +2,12 @@ import React from 'react';
+ import './TodoItem.css';
+ 
+ function TodoItem(props) {
+-  const onComplete = () => {
+-    alert('Ya completaste el todo ' + props.text)
+-  } 
+-
+-  const onDelete = () => {
+-    alert('Borraste el todo ' + props.text)
+-  } 
+ 
+   return (
+     <li className="TodoItem">
+       <span 
+         className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
+-        onClick={onComplete}
++        onClick={props.onComplete}
+       >
+         √
+       </span>
+@@ -23,7 +16,7 @@ function TodoItem(props) {
+       </p>
+       <span 
+         className="Icon Icon-delete"
+-        onClick={onDelete}  
++        onClick={props.onDelete}  
+       >
+         X
+       </span>
+diff --git a/cursodeintroduccionareact/src/TodoList.css b/cursodeintroduccionareact/src/TodoList/TodoList.css
+similarity index 100%
+rename from cursodeintroduccionareact/src/TodoList.css
+rename to cursodeintroduccionareact/src/TodoList/TodoList.css
+diff --git a/cursodeintroduccionareact/src/TodoList.js b/cursodeintroduccionareact/src/TodoList/index.js
+similarity index 100%
+rename from cursodeintroduccionareact/src/TodoList.js
+rename to cursodeintroduccionareact/src/TodoList/index.js
+diff --git a/cursodeintroduccionareact/src/TodoSearch.js b/cursodeintroduccionareact/src/TodoSearch.js
+deleted file mode 100644
+index 443f953..0000000
+--- a/cursodeintroduccionareact/src/TodoSearch.js
++++ /dev/null
+@@ -1,10 +0,0 @@
+-import React from "react";
+-import './TodoSearch.css'
+-
+-function TodoSearch() {
+-    return(
+-        <input className="TodoSearch" placeholder="Cebolla"/>
+-    );
+-}
+-
+-export { TodoSearch };
+\ No newline at end of file
+diff --git a/cursodeintroduccionareact/src/TodoSearch.css b/cursodeintroduccionareact/src/TodoSearch/TodoSearch.css
+similarity index 100%
+rename from cursodeintroduccionareact/src/TodoSearch.css
+rename to cursodeintroduccionareact/src/TodoSearch/TodoSearch.css
+diff --git a/cursodeintroduccionareact/src/TodoSearch/index.js b/cursodeintroduccionareact/src/TodoSearch/index.js
+new file mode 100644
+index 0000000..c8a0c59
+--- /dev/null
++++ b/cursodeintroduccionareact/src/TodoSearch/index.js
+@@ -0,0 +1,35 @@
++import React from "react";
++import './TodoSearch.css'
++
++// class Componente extends React.Component{
++//     constructor() {
++//         this.state = {
++//             patito: 'Juan'
++//         }
++//     }
++
++//     render() {
++//         return (
++//             <div onClick={() => this.setState('Enrique')}>{this.state.patito}</div>
++//         )
++//     }
++// }
++
++
++function TodoSearch({searchvalue, setSearchValue}) {
++    const onSearchValueChange = (change) => {
++         console.log(change.target.value);
++         setSearchValue(change.target.value)
++     }
++    
++    return (
++        <input 
++            className="TodoSearch"
++            placeholder="Cebolla"
++            value={searchvalue}
++            onChange={onSearchValueChange}    
++        />
++        );
++}
++
++export { TodoSearch };
+\ No newline at end of file
+diff --git a/cursodeintroduccionareact/src/index.js b/cursodeintroduccionareact/src/index.js
+index 481e35a..8ebf960 100644
+--- a/cursodeintroduccionareact/src/index.js
++++ b/cursodeintroduccionareact/src/index.js
+@@ -6,4 +6,4 @@ import App from './App';
+ ReactDOM.render(
+     <App/>,
+   document.getElementById('root')
+-);
+\ No newline at end of file
++); 
+\ No newline at end of file
