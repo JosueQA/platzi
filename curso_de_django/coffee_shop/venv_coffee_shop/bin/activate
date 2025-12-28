@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath /home/josue/platzi/curso_de_django/coffee_shop/coffee_shop_venv)
+    export VIRTUAL_ENV=$(cygpath /home/josue/platzi/curso_de_django/coffee_shop/venv_coffee_shop)
 else
     # use the path as-is
-    export VIRTUAL_ENV=/home/josue/platzi/curso_de_django/coffee_shop/coffee_shop_venv
+    export VIRTUAL_ENV=/home/josue/platzi/curso_de_django/coffee_shop/venv_coffee_shop
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"
@@ -59,9 +59,9 @@ fi
 
 if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
     _OLD_VIRTUAL_PS1="${PS1:-}"
-    PS1='(coffee_shop_venv) '"${PS1:-}"
+    PS1='(venv_coffee_shop) '"${PS1:-}"
     export PS1
-    VIRTUAL_ENV_PROMPT='(coffee_shop_venv) '
+    VIRTUAL_ENV_PROMPT='(venv_coffee_shop) '
     export VIRTUAL_ENV_PROMPT
 fi
 

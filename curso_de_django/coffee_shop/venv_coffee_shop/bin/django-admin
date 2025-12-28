@@ -1,4 +1,4 @@
-#!/home/josue/platzi/curso_de_django/coffee_shop/coffee_shop_venv/bin/python3
+#!/home/josue/platzi/curso_de_django/coffee_shop/venv_coffee_shop/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

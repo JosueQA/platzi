@@ -22,8 +22,6 @@
                         height="250"
                         width="200"
                         class="size-16 rounded-full object-cover sm:size-[120px]">
-                
-            
                 {% else %}  
                 {% endif %}
                 </div>
@@ -40,7 +38,6 @@
                 </p>
                 </div>
             </div>
-
             <dl class="mt-6 flex gap-4 lg:gap-6">
                 <div class="flex items-center gap-2">
                 <dt class="text-gray-700">
@@ -51,11 +48,19 @@
                     </svg>
                 </dt>
 
-                <dd class="text-xs text-gray-700">
-                    Disponibilidad: {% if product.stock %} {{ product.stock }} 
-                                    {% else %} Agotado 
-                                    {% endif %}
+                {% if product.available %} 
+                <form class="mt-4" method="post" action="{% url 'my_order_product' %}">
+                    {% csrf_token %}
+                    <label class="block text-sm font-medium text-gray-700">Cantidad:</label>
+                    <input type="number" name="quantity" min="1" value="1" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <input type="hidden" name="product" value="{{ product.id }}">
+                    <button class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Agregate</button>
+                </form>
+                {% else %} 
+                <dd class="block text-sm font-medium text-gray-700">
+                    Disponibilidad: Agotado 
                 </dd>
+                {% endif %}
                 </div>
             </dl>
             </a>
