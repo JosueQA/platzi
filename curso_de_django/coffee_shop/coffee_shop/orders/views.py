@@ -1,0 +1,11 @@
+from django.views.generic import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Order
+
+# Create your views here.
+class MyOrderView(LoginRequiredMixin, DetailView):
+    model = Order
+    template_name = 'orders/my_order.html'
+
+    def get_object(self, queryset=None):
+        return Order.objects.filter(is_active=True, user=self.request.user).first()

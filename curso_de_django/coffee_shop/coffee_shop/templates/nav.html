@@ -1,0 +1,27 @@
+<nav>
+  <a href="/">Home</a>
+  <a href="menu/">Menu</a>
+  <div class="dropdown">
+    <a href="{% url 'product_list' %}" class="dropbtn">Productos</a>
+    <div class="dropdown-content">
+      <a href="{% url 'product_list' %}">Ver Productos</a>
+      <a href="{% url 'product_form' %}">Registrar Producto</a>
+    </div>
+  </div>
+  <a href="about/">About</a>
+  <a href="contact/">Contact</a>
+  <div class="nav-buttons flex items-center">
+    {% comment %}Agregamos la seccion de inicio de sesion{% endcomment %}
+
+    {% if user.is_authenticated %}
+      <p class="text-white">Hola, {{ user.username }}</p>
+      
+      {% include 'orders/my_order_button.html' %}
+      {% comment %}Incluimos el template de logout{% endcomment %}
+      {% include 'users/logout.html' %}
+    {% else %}
+      <a href="{% url 'login' %}" class="nav-btn login-btn">LOGIN</a>
+      <a href="{% url 'register' %}" class="nav-btn register-btn">REGISTER</a>
+    {% endif %}
+  </div>
+</nav>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-5 text-center">Register</h2>
+    <form action="{% url 'register' %}" method="post">
+      {% csrf_token %}
+
+      <div class="mb-4">
+        <label for="{{ form.username.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">{{ form.username.label }}</label>
+        {{ form.username }}
+        <p class="text-red-500 text-xs italic">{{ form.username.errors }}</p>
+      </div>
+
+      <div class="mb-4">
+        <label for="{{ form.password1.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">{{ form.password1.label }}</label>
+        {{ form.password1 }}
+        <p class="text-red-500 text-xs italic">{{ form.password1.errors }}</p>
+      </div>
+
+      <div class="mb-4">
+        <label for="{{ form.password2.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">{{ form.password2.label }}</label>
+        {{ form.password2 }}
+        <p class="text-red-500 text-xs italic">{{ form.password2.errors }}</p>
+      </div>
+
+      <button type="submit" class="bg-[var(--primario)] hover:bg-[var(--secundario)] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">Register</button>
+    </form>
+  </div>
+{% endblock %}
