@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'products',
     'users',
     'orders',
@@ -136,3 +137,9 @@ LOGOUT_REDIRECT_URL = reverse_lazy("home")
 
 # Locale settings
 LANGUAGE_CODE = "es-es"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
