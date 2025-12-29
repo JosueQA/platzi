@@ -15,6 +15,5 @@ urlpatterns = [
         views.ProductFormView.as_view(),
         name="product_form",
     ),
+    path("api/", views.ProductListAPI.as_view(), name="product_list_api"),
 ]
-
- 
