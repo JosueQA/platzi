@@ -1,7 +1,10 @@
 from django.views.generic import DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Order
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializer import OrderProductSerializer, OrderSerializer
+from .models import Order, OrderProduct
 from .forms import OrderProductForm
 
 # Create your views here.
@@ -26,3 +29,21 @@ class CreateOrderProductView(LoginRequiredMixin, CreateView):
         form.instance.order = order
         form.save()
         return super().form_valid(form)
+
+class OrderAPI(APIView):
+    serializer_class = []
+    permission_classes = []
+
+    def get(self, request, *args, **kwargs):
+        order = Order.objects.all()
+        serializer = OrderSerializer(order, many=True)
+        return Response(serializer.data )
+    
+class OrderProductAPI(APIView):
+    serializer_class = []
+    permission_classes = []
+
+    def get(self, request, *args, **kwargs):
+        order = OrderProduct.objects.all()
+        serializer = OrderProductSerializer(order, many=True)
+        return Response(serializer.data )
